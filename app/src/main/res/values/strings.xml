@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Eloquence</string>
+    <string name="tts">Click for Text to Speech</string>
+    <string name="stt">Click for Speech to Text</string>
+</resources>
