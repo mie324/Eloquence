@@ -1,5 +1,7 @@
 package com.example.urmi.eloquence;
 
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.Voice;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,71 +19,41 @@ import com.google.protobuf.ByteString;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String[] wordList = new String[]{ "Love", "Hate", "Forward" };
+    private TextToSpeech t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-           Button tts_click = (Button) findViewById(R.id.tts_button);
+        Button tts_click = (Button) findViewById(R.id.tts_button);
 
-           Button stt_click = (Button)findViewById(R.id.stt_button);
+        Button stt_click = (Button)findViewById(R.id.stt_button);
+
+        t = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    t.setLanguage(Locale.US);
+                }
+            }
+        });
 
         tts_click.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                try (TextToSpeechClient textToSpeechClient = TextToSpeechClient.create()) {
-                    // Set the text input to be synthesized
-                    SynthesisInput input = SynthesisInput.newBuilder()
-                            .setText("Hello, World!")
-                            .build();
-
-                    // Build the voice request, select the language code ("en-US") and the ssml voice gender
-                    // ("neutral")
-                    VoiceSelectionParams voice = VoiceSelectionParams.newBuilder()
-                            .setLanguageCode("en-US")
-                            .setSsmlGender(SsmlVoiceGender.NEUTRAL)
-                            .build();
-
-                    // Select the type of audio file you want returned
-                    AudioConfig audioConfig = AudioConfig.newBuilder()
-                            .setAudioEncoding(AudioEncoding.MP3)
-                            .build();
-
-                    // Perform the text-to-speech request on the text input with the selected voice parameters and
-                    // audio file type
-                    SynthesizeSpeechResponse response = textToSpeechClient.synthesizeSpeech(input, voice,
-                            audioConfig);
-
-                    // Get the audio contents from the response
-                    ByteString audioContents = response.getAudioContent();
-
-                    // Write the response to the output file.
-                    try (OutputStream out = new FileOutputStream("output.mp3")) {
-                        out.write(audioContents.toByteArray());
-                        if(out == null){
-                            Log.i("Activity","Out is null");
-                        }
-                        else {
-                            System.out.println("Audio content written to file \"output.mp3\"");
-                        }
-
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        });
-
-        stt_click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+            public void onClick(View view) {
+                String toSpeak = "Say the word, " + wordList[0];
+                t.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
 

@@ -24,9 +24,5 @@ public class SignIn extends AppCompatActivity {
         final String username = mUsernameView.getText().toString();
         final String hearing = mHearingView.getText().toString();
 
-
-
-
-
     }
 }
