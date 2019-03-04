@@ -1,34 +1,18 @@
 package com.example.urmi.eloquence;
 
 import android.content.Intent;
+import android.provider.UserDictionary;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.Voice;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.google.cloud.texttospeech.v1.AudioConfig;
-import com.google.cloud.texttospeech.v1.AudioEncoding;
-import com.google.cloud.texttospeech.v1.SsmlVoiceGender;
-import com.google.cloud.texttospeech.v1.SynthesisInput;
-import com.google.cloud.texttospeech.v1.SynthesizeSpeechResponse;
-import com.google.cloud.texttospeech.v1.TextToSpeechClient;
-import com.google.cloud.texttospeech.v1.VoiceSelectionParams;
-import com.google.protobuf.ByteString;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,12 +78,17 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 List<String> results = data.getStringArrayListExtra
                         (RecognizerIntent.EXTRA_RESULTS);
-                String mAnswer = results.get(0);
 
-                if (mAnswer.toLowerCase().indexOf(WordsUtility.getWordAt(currentWordIndex)) > -1)
+                Log.d("Main", results.toString());
+
+                int foundIndex = results.indexOf(WordsUtility.getWordAt(currentWordIndex));
+
+                if (foundIndex > -1) {
+                    String mAnswer = results.get(foundIndex);
                     Toast.makeText(MainActivity.this, "You answered '" + mAnswer.toUpperCase() + "', which is correct.", Toast.LENGTH_SHORT).show();
+                }
                 else
-                    Toast.makeText(MainActivity.this, "You answered '" + mAnswer.toUpperCase() + "', which is incorrect.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "You answered '" + results.get(0) + "', which is incorrect.", Toast.LENGTH_SHORT).show();
 
             }
         }
