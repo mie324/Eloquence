@@ -2,4 +2,9 @@
     <string name="app_name">Eloquence</string>
     <string name="tts">Click for Text to Speech</string>
     <string name="stt">Click for Speech to Text</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="hearing_loss">Describe about Hearing Problems if Any</string>
 </resources>

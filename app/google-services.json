@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "443454528238",
+    "firebase_url": "https://eloquence-e0408.firebaseio.com",
+    "project_id": "eloquence-e0408",
+    "storage_bucket": "eloquence-e0408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443454528238:android:2a116253311dc816",
+        "android_client_info": {
+          "package_name": "com.example.urmi.eloquence"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443454528238-i5e0qbnmt9gupqc8ppnjcmd7jjpu9n1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.urmi.eloquence",
+            "certificate_hash": "80c58d84f704f97666bfc049cedd84e5ff2afc98"
+          }
+        },
+        {
+          "client_id": "443454528238-9ih85j1957og14ej52vbqd7g0umli881.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7MdNv52y2iytH2Iu308ydmjQ13nxnDUY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443454528238-9ih85j1957og14ej52vbqd7g0umli881.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
