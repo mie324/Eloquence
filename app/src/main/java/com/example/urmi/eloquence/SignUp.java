@@ -51,6 +51,7 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.login_email);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -69,7 +70,7 @@ public class SignUp extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptRegister(email, password);
+                attemptRegister();
             }
         });
 
@@ -160,7 +161,7 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-    private void attemptRegister(String email,String password){
+    private void attemptRegister(){
         Log.d(TAG, "signIn:" + mEmailView + "----------------------------------");
 
         if(!validate()) {
@@ -168,6 +169,9 @@ public class SignUp extends AppCompatActivity {
         }
 
         Log.d(TAG, "createUserWithEmail:part 1 ----------------------------");
+
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

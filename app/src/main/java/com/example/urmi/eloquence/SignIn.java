@@ -53,14 +53,14 @@ public class SignIn extends AppCompatActivity {
         SignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin(email, password);
+                attemptLogin();
             }
         });
 
         SignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignIn.this, MainActivity.class);
+                Intent intent = new Intent(SignIn.this, SignUp.class);
                 startActivity(intent);
             }
         });
@@ -123,13 +123,16 @@ public class SignIn extends AppCompatActivity {
         return valid;
     }
 
-    private void attemptLogin(String email, String password) {
+    private void attemptLogin() {
 
         Log.d(TAG, "signIn:" + mEmailView);
 
         if(!validateform()) {
             return;
         }
+
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
 
         auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -160,7 +163,7 @@ public class SignIn extends AppCompatActivity {
             startActivity(intent);
 
         } else  {
-            Toast.makeText(SignIn.this, "Enter Details to Log In.",
+            Toast.makeText(SignIn.this, "User Not Registered.",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -172,8 +175,9 @@ public class SignIn extends AppCompatActivity {
             startActivity(intent);
 
         } else  {
-            Toast.makeText(SignIn.this, "Enter Details to Log In.",
+            Toast.makeText(SignIn.this,"Enter Details to Log In."  ,
                     Toast.LENGTH_SHORT).show();
+            onResume();
         }
     }
 
