@@ -78,7 +78,6 @@ public class SignUp extends AppCompatActivity {
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
-
     private boolean isPasswordValid(String password) {
         return password.length() > 6;
     }

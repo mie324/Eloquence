@@ -10,6 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -23,15 +27,20 @@ public class MainActivity extends AppCompatActivity {
     private TextToSpeech t;
     private final int REQUEST_SPEECH_RECOGNIZER = 3000;
 
+    FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        auth = FirebaseAuth.getInstance();
+
         WordsUtility = new WordsList();
 
         Button tts_click = findViewById(R.id.tts_button);
         Button stt_click = findViewById(R.id.stt_button);
+        Button signout =(Button) findViewById(R.id.signout_button);
 
         t = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -55,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startSpeechRecognizer();
+            }
+        });
+
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
             }
         });
 
@@ -91,6 +107,26 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "You answered '" + results.get(0) + "', which is incorrect.", Toast.LENGTH_SHORT).show();
 
             }
+        }
+    }
+
+    private void signOut() {
+        auth.signOut();
+        updateUI(null);
+    }
+
+    private void updateUI(FirebaseUser user) {
+        // hideProgressDialog();
+        if (user != null) {
+
+            Toast.makeText(MainActivity.this, "Firebase User Logged In.",
+                    Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            Intent intent = new Intent(MainActivity.this, SignIn.class);
+            startActivity(intent);
+
         }
     }
 

@@ -13,4 +13,5 @@
     <string name="error_invalid_password">Password should be minimum 6 characters!</string>
     <string name="action_sign_in">Sign In</string>
     <string name="action_register">Sign Up</string>
+    <string name="signout">Sign Out</string>
 </resources>
