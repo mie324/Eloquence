@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "443454528238-62mtsdssdrlh0uvli60b903k9bqo5tom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.urmi.eloquence",
+            "certificate_hash": "1f0f308c143cf96e829b4757cec28a94af4ebcef"
+          }
+        },
+        {
           "client_id": "443454528238-9ih85j1957og14ej52vbqd7g0umli881.apps.googleusercontent.com",
           "client_type": 3
         }

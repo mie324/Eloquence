@@ -1,90 +1,98 @@
 package com.example.urmi.eloquence;
 
+import android.content.Intent;
+import android.provider.UserDictionary;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.google.cloud.texttospeech.v1.AudioConfig;
-import com.google.cloud.texttospeech.v1.AudioEncoding;
-import com.google.cloud.texttospeech.v1.SsmlVoiceGender;
-import com.google.cloud.texttospeech.v1.SynthesisInput;
-import com.google.cloud.texttospeech.v1.SynthesizeSpeechResponse;
-import com.google.cloud.texttospeech.v1.TextToSpeechClient;
-import com.google.cloud.texttospeech.v1.VoiceSelectionParams;
-import com.google.protobuf.ByteString;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import android.widget.Toast;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    private WordsList WordsUtility;
+    Random r = new Random();
+    private int currentWordIndex;
+    private String toSpeak;
+    private TextToSpeech t;
+    private final int REQUEST_SPEECH_RECOGNIZER = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-           Button tts_click = (Button) findViewById(R.id.tts_button);
+        WordsUtility = new WordsList();
 
-           Button stt_click = (Button)findViewById(R.id.stt_button);
+        Button tts_click = findViewById(R.id.tts_button);
+        Button stt_click = findViewById(R.id.stt_button);
+
+        t = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    t.setLanguage(Locale.US);
+                }
+            }
+        });
 
         tts_click.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                try (TextToSpeechClient textToSpeechClient = TextToSpeechClient.create()) {
-                    // Set the text input to be synthesized
-                    SynthesisInput input = SynthesisInput.newBuilder()
-                            .setText("Hello, World!")
-                            .build();
-
-                    // Build the voice request, select the language code ("en-US") and the ssml voice gender
-                    // ("neutral")
-                    VoiceSelectionParams voice = VoiceSelectionParams.newBuilder()
-                            .setLanguageCode("en-US")
-                            .setSsmlGender(SsmlVoiceGender.NEUTRAL)
-                            .build();
-
-                    // Select the type of audio file you want returned
-                    AudioConfig audioConfig = AudioConfig.newBuilder()
-                            .setAudioEncoding(AudioEncoding.MP3)
-                            .build();
-
-                    // Perform the text-to-speech request on the text input with the selected voice parameters and
-                    // audio file type
-                    SynthesizeSpeechResponse response = textToSpeechClient.synthesizeSpeech(input, voice,
-                            audioConfig);
-
-                    // Get the audio contents from the response
-                    ByteString audioContents = response.getAudioContent();
-
-                    // Write the response to the output file.
-                    try (OutputStream out = new FileOutputStream("output.mp3")) {
-                        out.write(audioContents.toByteArray());
-                        if(out == null){
-                            Log.i("Activity","Out is null");
-                        }
-                        else {
-                            System.out.println("Audio content written to file \"output.mp3\"");
-                        }
-
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void onClick(View view) {
+                currentWordIndex = r.nextInt(WordsUtility.getWordsLength());
+                toSpeak = "Say the word, " + WordsUtility.getWordAt(currentWordIndex);
+                t.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
             }
-
-
         });
 
         stt_click.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View view) {
+                startSpeechRecognizer();
             }
         });
 
     }
+
+    private void startSpeechRecognizer() {
+        Intent intent = new Intent
+                (RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, toSpeak);
+        startActivityForResult(intent, REQUEST_SPEECH_RECOGNIZER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_SPEECH_RECOGNIZER) {
+            if (resultCode == RESULT_OK) {
+                List<String> results = data.getStringArrayListExtra
+                        (RecognizerIntent.EXTRA_RESULTS);
+
+                Log.d("Main", results.toString());
+
+                int foundIndex = results.indexOf(WordsUtility.getWordAt(currentWordIndex));
+
+                if (foundIndex > -1) {
+                    String mAnswer = results.get(foundIndex);
+                    Toast.makeText(MainActivity.this, "You answered '" + mAnswer.toUpperCase() + "', which is correct.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(MainActivity.this, "You answered '" + results.get(0) + "', which is incorrect.", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
 }
 
