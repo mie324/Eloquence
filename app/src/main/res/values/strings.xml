@@ -7,4 +7,10 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="hearing_loss">Describe about Hearing Problems if Any</string>
+    <string name="error_field_required">Field Required</string>
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="error_not_match">Password not matched</string>
+    <string name="error_invalid_password">Password should be minimum 6 characters!</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_register">Sign Up</string>
 </resources>

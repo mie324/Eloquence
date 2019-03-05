@@ -168,7 +168,6 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-
         Log.d(TAG, "createUserWithEmail:part 1 ----------------------------");
 
         auth.createUserWithEmailAndPassword(email, password)
