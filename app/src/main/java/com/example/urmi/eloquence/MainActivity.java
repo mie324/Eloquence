@@ -1,7 +1,7 @@
 package com.example.urmi.eloquence;
 
 import android.content.Intent;
-import android.provider.UserDictionary;
+import android.graphics.Color;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/Chewy-Regular.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
 
         auth = FirebaseAuth.getInstance();
 
@@ -102,10 +104,27 @@ public class MainActivity extends AppCompatActivity {
                 if (foundIndex > -1) {
                     String mAnswer = results.get(foundIndex);
                     Toast.makeText(MainActivity.this, "You answered '" + mAnswer.toUpperCase() + "', which is correct.", Toast.LENGTH_SHORT).show();
+                    TextView tv = findViewById(R.id.resultTextView);
+                    tv.setTextColor(Color.parseColor("#338323"));
+                    tv.setText("Great job! You got it right. :)");
                 }
-                else
+                else{
                     Toast.makeText(MainActivity.this, "You answered '" + results.get(0) + "', which is incorrect.", Toast.LENGTH_SHORT).show();
+                    TextView tv = findViewById(R.id.resultTextView);
+                    tv.setText("Uh oh! You wanna try it again. :(");
+                    tv.setTextColor(Color.parseColor("#D82A17"));
+                    findViewById(R.id.resultImageView).setBackgroundResource(R.drawable.ic_clear_red_300_48dp);
+                }
 
+                new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            TextView tv = findViewById(R.id.resultTextView);
+                            tv.setTextColor(Color.parseColor("#34AADC"));
+                            tv.setText("Let's practive our words");
+                        }
+                    },
+                    3000);
             }
         }
     }

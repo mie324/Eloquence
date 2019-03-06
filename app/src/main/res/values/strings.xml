@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Eloquence</string>
-    <string name="tts">Click for Text to Speech</string>
-    <string name="stt">Click for Speech to Text</string>
+    <string name="tts">Play</string>
+    <string name="stt">Record</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
