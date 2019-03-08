@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUp" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".TestTypeActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".TrainActivity" />
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>
