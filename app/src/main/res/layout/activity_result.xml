@@ -31,7 +31,6 @@
         android:layout_width="145dp"
         android:layout_height="83dp"
         android:gravity="center"
-        android:text="Great job! You got 20/25 words correctly"
         android:textAlignment="center"
         android:textColor="#34AADC"
         android:textSize="20sp"

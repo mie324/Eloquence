@@ -23,10 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
     private WordsList WordsUtility;
     Random r = new Random();
-    private int currentWordIndex;
+    private int MAX_WORDS = 3;
+    private int currentWordIndex = 0;
+    private int currentScore = 0;
     private String toSpeak;
     private TextToSpeech t;
+    private Button tts_click;
+    private Button stt_click;
     private final int REQUEST_SPEECH_RECOGNIZER = 3000;
+    private List<String> testWords;
 
     FirebaseAuth auth;
 
@@ -34,14 +39,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/Chewy-Regular.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
 
         auth = FirebaseAuth.getInstance();
 
         WordsUtility = new WordsList();
+        testWords = WordsUtility.getTestWords(MAX_WORDS);
 
-        Button tts_click = findViewById(R.id.tts_button);
-        Button stt_click = findViewById(R.id.stt_button);
+        tts_click = findViewById(R.id.tts_button);
+        stt_click = findViewById(R.id.stt_button);
+        stt_click.setEnabled(false);
         Button signout =(Button) findViewById(R.id.signout_button);
 
         t = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -56,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         tts_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentWordIndex = r.nextInt(WordsUtility.getWordsLength());
-                toSpeak = "Say the word, " + WordsUtility.getWordAt(currentWordIndex);
+                toSpeak = "Say the word, " + testWords.get(currentWordIndex);
                 t.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+                stt_click.setEnabled(true);
             }
         });
 
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d("Main", results.toString());
 
-                int foundIndex = results.indexOf(WordsUtility.getWordAt(currentWordIndex));
+                int foundIndex = results.indexOf(testWords.get(currentWordIndex));
 
                 if (foundIndex > -1) {
                     String mAnswer = results.get(foundIndex);
@@ -107,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView tv = findViewById(R.id.resultTextView);
                     tv.setTextColor(Color.parseColor("#338323"));
                     tv.setText("Great job! You got it right. :)");
+                    currentScore++;
                 }
                 else{
                     Toast.makeText(MainActivity.this, "You answered '" + results.get(0) + "', which is incorrect.", Toast.LENGTH_SHORT).show();
@@ -115,6 +122,26 @@ public class MainActivity extends AppCompatActivity {
                     tv.setTextColor(Color.parseColor("#D82A17"));
                     findViewById(R.id.resultImageView).setBackgroundResource(R.drawable.ic_clear_red_300_48dp);
                 }
+
+                currentWordIndex++;
+                stt_click.setEnabled(false);
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                if (currentWordIndex == testWords.size()) {
+                                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putString("TEST_SCORE", Integer.toString(currentScore));
+                                    extras.putString("MAX_SCORE", Integer.toString(MAX_WORDS));
+                                    intent.putExtras(extras);
+                                    startActivity(intent);
+                                }
+                            }
+                        },
+                        1000
+                );
 
                 new android.os.Handler().postDelayed(
                     new Runnable() {
