@@ -171,7 +171,7 @@ public class SignIn extends AppCompatActivity {
     private void updateUI1(FirebaseUser user) {
         if (user != null) {
 
-            Intent intent = new Intent(SignIn.this, MainActivity.class);
+            Intent intent = new Intent(SignIn.this, TestTypeActivity.class);
             startActivity(intent);
 
         } else  {
