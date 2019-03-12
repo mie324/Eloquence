@@ -16,12 +16,12 @@ public class TestTypeActivity extends AppCompatActivity {
     }
 
     public void openTest(View view) {
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     public void openTrain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, TrainActivity.class);
         startActivity(intent);
     }
 }

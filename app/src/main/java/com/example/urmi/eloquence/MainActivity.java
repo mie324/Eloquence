@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                     Bundle extras = new Bundle();
                                     extras.putString("TEST_SCORE", Integer.toString(currentScore));
                                     extras.putString("MAX_SCORE", Integer.toString(MAX_WORDS));
+                                    extras.putString("TEST_TYPE", "test");
                                     intent.putExtras(extras);
                                     startActivity(intent);
                                 }
