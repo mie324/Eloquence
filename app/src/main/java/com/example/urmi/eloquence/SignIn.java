@@ -27,8 +27,6 @@ public class SignIn extends AppCompatActivity {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
 
     private FirebaseAuth auth;
 
@@ -43,9 +41,6 @@ public class SignIn extends AppCompatActivity {
         mEmailView = (AutoCompleteTextView) findViewById(R.id.login_email1);
         mPasswordView = (EditText) findViewById(R.id.login_password);
         Button SignInButton = (Button) findViewById(R.id.login_signin_btn);
-        Button SignUpButton = (Button) findViewById(R.id.loginpg_register_btn);
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
 
         email = mEmailView.getText().toString();
         password = mPasswordView.getText().toString();
@@ -54,14 +49,6 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
-            }
-        });
-
-        SignUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignIn.this, SignUp.class);
-                startActivity(intent);
             }
         });
 
