@@ -28,12 +28,16 @@ public class SignUp extends AppCompatActivity {
     private static final String TAG = "REGISTER";
     private static final String USERNAME = "Username";
     private static final String HEARING = "Hearing_Info";
+    private static final String DOB = "dob";
+    private static final String NAME = "fullname";
 
     AutoCompleteTextView mEmailView;
     EditText mPasswordView;
     EditText mConfirmPasswordView;
     EditText mUsernameView;
     EditText mHearingView;
+    EditText dobField;
+    EditText nameField;
 
     String email;
     String password;
@@ -58,6 +62,8 @@ public class SignUp extends AppCompatActivity {
         mConfirmPasswordView = (EditText)findViewById(R.id.confirm_pwd);
         mUsernameView = (EditText)findViewById(R.id.username);
         mHearingView = (EditText)findViewById(R.id.hearing_loss);
+        nameField = findViewById(R.id.nameField);
+        dobField = findViewById(R.id.dobField);
 
         Button signup = (Button)findViewById(R.id.registerpage_btn);
 
@@ -97,9 +103,25 @@ public class SignUp extends AppCompatActivity {
         String c_password = mConfirmPasswordView.getText().toString();
         String username = mUsernameView.getText().toString();
         String hearing = mHearingView.getText().toString();
+        String name = nameField.getText().toString();
+        String dob = dobField.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
+
+        if (TextUtils.isEmpty(name)) {
+            nameField.setError("Please enter a valid name");
+            focusView = nameField;
+            cancel = true;
+            valid = false;
+        }
+
+        if (TextUtils.isEmpty(dob)) {
+            dobField.setError("Please enter a valid date of birth");
+            focusView = dobField;
+            cancel = true;
+            valid = false;
+        }
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
@@ -205,12 +227,14 @@ public class SignUp extends AppCompatActivity {
             Map< String, Object > User = new HashMap< >();
             User.put(USERNAME, mUsernameView.getText().toString().trim());
             User.put(HEARING, mHearingView.getText().toString().trim());
+            User.put(DOB, dobField.getText().toString().trim());
+            User.put(NAME, nameField.getText().toString().trim());
 
             Log.d(TAG, "createUserWithEmail:in UpdateUI");
             DocumentReference mRef = db.collection("UserMetaData").document(user.getUid());
             mRef.set(User);
 
-            Intent intent =   new Intent(SignUp.this, MainActivity.class);
+            Intent intent =   new Intent(SignUp.this, TestTypeActivity.class);
             startActivity(intent);
         }
 
