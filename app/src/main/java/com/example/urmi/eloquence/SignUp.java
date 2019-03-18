@@ -62,8 +62,8 @@ public class SignUp extends AppCompatActivity {
         mConfirmPasswordView = (EditText)findViewById(R.id.confirm_pwd);
         mUsernameView = (EditText)findViewById(R.id.username);
         mHearingView = (EditText)findViewById(R.id.hearing_loss);
-        nameField = findViewById(R.id.nameField);
-        dobField = findViewById(R.id.dobField);
+        nameField = (EditText) findViewById(R.id.nameField);
+        dobField = (EditText) findViewById(R.id.dobField);
 
         Button signup = (Button)findViewById(R.id.registerpage_btn);
 
@@ -72,6 +72,8 @@ public class SignUp extends AppCompatActivity {
         confirm_password = mConfirmPasswordView.getText().toString();
         username = mUsernameView.getText().toString();
         hearing = mHearingView.getText().toString();
+
+        setDate fromDate = new setDate(dobField, this);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override

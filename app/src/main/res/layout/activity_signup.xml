@@ -167,6 +167,7 @@
         android:textColorHint="@color/colorFontGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
         app:layout_constraintTop_toBottomOf="@+id/nameField" />
 
 </android.support.constraint.ConstraintLayout>
