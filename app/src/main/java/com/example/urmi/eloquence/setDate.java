@@ -39,7 +39,6 @@ class setDate implements View.OnFocusChangeListener, DatePickerDialog.OnDateSetL
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        // TODO Auto-generated method stub
         if(hasFocus){
             new DatePickerDialog(ctx, this, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),

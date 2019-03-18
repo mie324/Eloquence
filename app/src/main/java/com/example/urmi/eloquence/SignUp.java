@@ -242,7 +242,7 @@ public class SignUp extends AppCompatActivity {
 
         else {
 
-            Toast.makeText(SignUp.this, "Something went wrong Account not registered.",
+            Toast.makeText(SignUp.this, "Email ID already registered.",
                     Toast.LENGTH_SHORT).show();
          }
     }

@@ -36,6 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
@@ -45,7 +46,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#ffff"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         android:hint="@string/username"
         android:inputType="textPersonName"
         android:textAlignment="viewStart"
@@ -76,6 +77,7 @@
         android:textColorHint="@color/colorFontGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
 
@@ -87,8 +89,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:autofillHints=""
-        android:backgroundTint="#ffff"
-
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         android:hint="@string/confirm_password"
         android:inputType="textPassword"
         android:textAlignment="viewStart"
@@ -106,7 +107,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#ffff"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         android:ems="10"
         android:hint="@string/hearing_loss"
         android:inputType="textMultiLine"
@@ -150,6 +151,7 @@
         android:textColor="@color/colorFontGreen"
         android:textColorHint="@color/colorFontGreen"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appname" />
 
@@ -166,6 +168,7 @@
         android:textColor="@color/colorFontGreen"
         android:textColorHint="@color/colorFontGreen"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintStart_toStartOf="parent"
         android:clickable="true"
         app:layout_constraintTop_toBottomOf="@+id/nameField" />

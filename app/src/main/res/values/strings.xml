@@ -6,7 +6,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
-    <string name="hearing_loss">Describe about Hearing Problems if Any</string>
+    <string name="hearing_loss">Describe about Hearing Problems else type NA</string>
     <string name="error_field_required">Field Required</string>
     <string name="error_invalid_email">Invalid Email</string>
     <string name="error_not_match">Password not matched</string>
