@@ -41,7 +41,7 @@ public class ResultActivity extends AppCompatActivity {
             iv2.setVisibility(iv2.INVISIBLE);
             ImageView rv = findViewById(R.id.resultImageView);
             rv.setBackground(getResources().getDrawable(R.drawable.bubble_right, this.getTheme()));
-            tv.setText("Good word! You got " + testScore +"practice words right");
+            tv.setText("Good word! You got " + testScore +" practice words right");
         } else {
             ImageView rv = findViewById(R.id.resultImageView);
             rv.setBackground(getResources().getDrawable(R.drawable.bubble, this.getTheme()));
