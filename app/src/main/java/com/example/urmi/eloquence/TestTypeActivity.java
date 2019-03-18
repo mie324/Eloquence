@@ -55,10 +55,9 @@ public class TestTypeActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
 
         } else {
-
             Intent intent = new Intent(this, ConnectActivity.class);
             startActivity(intent);
-
+            finish();
         }
     }
 }

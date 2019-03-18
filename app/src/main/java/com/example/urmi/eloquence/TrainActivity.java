@@ -238,8 +238,9 @@ public class TrainActivity extends AppCompatActivity {
 
         } else {
 
-            Intent intent = new Intent(TrainActivity.this, SignIn.class);
+            Intent intent = new Intent(TrainActivity.this, ConnectActivity.class);
             startActivity(intent);
+            finish();
 
         }
     }

@@ -239,10 +239,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
 
         } else {
-
-            Intent intent = new Intent(MainActivity.this, SignIn.class);
+            Intent intent = new Intent(MainActivity.this, ConnectActivity.class);
             startActivity(intent);
-
+            finish();
         }
     }
 
