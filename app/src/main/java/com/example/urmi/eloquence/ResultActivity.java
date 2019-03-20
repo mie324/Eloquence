@@ -51,6 +51,7 @@ public class ResultActivity extends AppCompatActivity {
         result.put("testScore", Integer.parseInt(testScore));
         result.put("maxScore", Integer.parseInt(maxScore));
         result.put("timestamp", new Date().getTime());
+        result.put("uid", user.getUid());
 
         if (testType.equals("training")) {
             TextView tv2 = findViewById(R.id.textView2);
@@ -113,6 +114,11 @@ public class ResultActivity extends AppCompatActivity {
 
     public void openTest(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openProgress(View view) {
+        Intent intent = new Intent(this, ProgressActivity.class);
         startActivity(intent);
     }
 }

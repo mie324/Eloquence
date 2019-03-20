@@ -33,7 +33,7 @@ public class TrainActivity extends AppCompatActivity {
 
     private WordsList WordsUtility;
     Random r = new Random();
-    private int MAX_WORDS = 3;
+    private int MAX_WORDS = 2;
     private int currentWordIndex = 0;
     private int currentScore = 0;
     private String toSpeak;
