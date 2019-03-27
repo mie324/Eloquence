@@ -7,4 +7,8 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlue">#34A3FF</color>
     <color name="colorDarkBlue">#246DA8</color>
+    <color name="colorLightOrange">#f9d084</color>
+    <color name="colorMildOrange">#f5b85a</color>
+    <color name="colorDarkOrange">#ef8e50</color>
+
 </resources>
