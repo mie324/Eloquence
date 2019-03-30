@@ -146,7 +146,7 @@ public class SignIn extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if (user != null) {
 
-            Intent intent = new Intent(SignIn.this, TestTypeActivity.class);
+            Intent intent = new Intent(SignIn.this,homePage.class);
             startActivity(intent);
 
         } else  {
@@ -158,7 +158,7 @@ public class SignIn extends AppCompatActivity {
     private void updateUI1(FirebaseUser user) {
         if (user != null) {
 
-            Intent intent = new Intent(SignIn.this, TestTypeActivity.class);
+            Intent intent = new Intent(SignIn.this, homePage.class);
             startActivity(intent);
 
         } else  {
