@@ -42,7 +42,7 @@ public class ConnectActivity extends AppCompatActivity {
     private void updateUI1(FirebaseUser user) {
         if (user != null) {
 
-            Intent intent = new Intent(ConnectActivity.this, TestTypeActivity.class);
+            Intent intent = new Intent(ConnectActivity.this, homePage.class);
             startActivity(intent);
 
         } else  {

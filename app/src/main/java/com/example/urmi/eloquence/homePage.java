@@ -53,6 +53,7 @@ public class homePage extends AppCompatActivity {
                 text.setText("Welcome to Eloquence! We are going to practice our speech together so that we can keep learning new words. " +
                         "There are two things we can do, we can practice saying words or we can test how well we can say words played for us. If you are ready to practice your words press “START”.  If you want to see your progress so far, press “How am I doing?");
 
+                text.setTextSize(16);
                 Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 // if button is clicked, close the custom dialog
                 dialogButton.setOnClickListener(new View.OnClickListener() {
