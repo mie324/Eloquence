@@ -8,15 +8,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class homePage extends AppCompatActivity {
 
     final Context context = this;
 
+    FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        auth = FirebaseAuth.getInstance();
 
         Button start = findViewById(R.id.start_button);
         Button progress = findViewById(R.id.progress_button);
@@ -67,5 +75,17 @@ public class homePage extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateUI(FirebaseUser user) {
+        Intent intent = new Intent(homePage.this, ConnectActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+    public void signout(View view) {
+        auth.signOut();
+        updateUI(null);
     }
 }

@@ -22,19 +22,6 @@ public class TestTypeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_type);
 
         auth = FirebaseAuth.getInstance();
-        Button signout  = (Button)findViewById(R.id.signout_button1);
-
-        signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signout();
-            }
-        });
-    }
-
-    private void signout() {
-        auth.signOut();
-        updateUI(null);
     }
 
     public void openTest(View view) {
@@ -47,17 +34,9 @@ public class TestTypeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void updateUI(FirebaseUser user) {
-        // hideProgressDialog();
-        if (user != null) {
-
-            Toast.makeText(TestTypeActivity.this, "Firebase User Logged In.",
-                    Toast.LENGTH_SHORT).show();
-
-        } else {
-            Intent intent = new Intent(this, ConnectActivity.class);
-            startActivity(intent);
-            finish();
-        }
+    public void openHomepage(View view) {
+        Intent intent = new Intent(TestTypeActivity.this, homePage.class);
+        startActivity(intent);
+        finish();
     }
 }

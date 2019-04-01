@@ -1,11 +1,13 @@
 package com.example.urmi.eloquence;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -77,7 +79,8 @@ public class ProgressActivity extends AppCompatActivity {
 
                             Log.d("PROGRESS", entries.toString());
 
-                            LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
+                            LineDataSet dataSet = new LineDataSet(entries, "Test percentages"); // add entries to dataset
+                            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
                             Drawable drawable = ContextCompat.getDrawable(ProgressActivity.this, R.drawable.fade_red);
                             dataSet.setDrawFilled(true);
                             dataSet.setFillDrawable(drawable);
@@ -85,9 +88,13 @@ public class ProgressActivity extends AppCompatActivity {
 //                            dataSet.setValueTextColor(...);
 
                             LineData lineData = new LineData(dataSet);
+                            chart.setExtraOffsets(0,20,0,12);
                             chart.setData(lineData);
                             XAxis xAxis = chart.getXAxis();
                             xAxis.setValueFormatter(formatter);
+                            chart.getXAxis().setTextSize(16f);
+                            chart.getAxisLeft().setTextSize(16f);
+                            chart.getAxisRight().setTextSize(16f);
                             chart.invalidate();
 
                         } else {
@@ -95,5 +102,11 @@ public class ProgressActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void openHomepage(View view) {
+        Intent intent = new Intent(ProgressActivity.this, homePage.class);
+        startActivity(intent);
+        finish();
     }
 }

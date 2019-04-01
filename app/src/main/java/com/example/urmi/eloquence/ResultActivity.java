@@ -121,4 +121,10 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProgressActivity.class);
         startActivity(intent);
     }
+
+    public void openHomepage(View view) {
+        Intent intent = new Intent(ResultActivity.this, homePage.class);
+        startActivity(intent);
+        finish();
+    }
 }

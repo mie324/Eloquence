@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         tts_click = findViewById(R.id.tts_button);
         stt_click = findViewById(R.id.stt_button);
         stt_click.setEnabled(false);
-        Button signout =(Button) findViewById(R.id.signout_button);
 
         t = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -208,13 +207,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-            }
-        });
-
     }
 
     private void checkPermission () {
@@ -224,11 +216,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
-    }
-
-    private void signOut() {
-        auth.signOut();
-        updateUI(null);
     }
 
     private void updateUI(FirebaseUser user) {
@@ -245,5 +232,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void openHomepage(View view) {
+        Intent intent = new Intent(MainActivity.this, homePage.class);
+        startActivity(intent);
+        finish();
+    }
 }
 
