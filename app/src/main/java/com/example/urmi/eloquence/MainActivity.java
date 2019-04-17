@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         tv = findViewById(R.id.resultTextView);
 
         WordsUtility = new WordsList();
-        testWords = WordsUtility.getTestWords(MAX_WORDS);
+        testWords = WordsUtility.getTestWords(MAX_WORDS, "test");
 
         tts_click = findViewById(R.id.tts_button);
         stt_click = findViewById(R.id.stt_button);
